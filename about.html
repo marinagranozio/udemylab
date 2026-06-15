@@ -1,40 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chi Siamo - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-    <a href="index.html">Home</a> |
-    <a href="about.html">Chi Sono</a> |
-    <a href="contact.html">Contatti</a>
-</nav>
-<hr>
-    <h1>Chi Sono</h1>
-<p>Ecco un riassunto del mio percorso accademico e professionale:</p>
+    
+    <header class="page-header">
+        <a href="index.html" class="back-link">&larr; Torna alla Home</a>
+        <h1>Il Nostro Team</h1>
+    </header>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Anno</th>
-            <th>Ruolo / Studio</th>
-            <th>Descrizione</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>2024 - 2026</td>
-            <td>Sviluppatore Web in Formazione</td>
-            <td>Studio di HTML, CSS, JS, Node.js e Python.</td>
-        </tr>
-        <tr>
-            <td>2020 - 2023</td>
-            <td>Laurea / Diploma</td>
-            <td>Il mio percorso di studi precedente.</td>
-        </tr>
-    </tbody>
-</table>
+    <main class="page-content">
+        <p class="intro-text">
+            Siamo due sviluppatori appassionati che stanno affrontando insieme un percorso intensivo di apprendimento. 
+            Uniamo le nostre forze per costruire progetti web completi, dal design dell'interfaccia alla logica di backend.
+        </p>
+
+        <div class="team-container">
+            
+            <div class="team-member">
+                <img src="tua-foto.jpg" alt="Foto di [Tuo Nome]" class="profile-pic">
+                <h3>[Tuo Nome]</h3>
+                <p>Sviluppatore Web in Formazione. Mi concentro sulla creazione di interfacce utente dinamiche e responsive.</p>
+            </div>
+
+            <div class="team-member">
+                <img src="foto-collega.jpg" alt="Foto del Collega" class="profile-pic">
+                <h3>[Nome Collega]</h3>
+                <p>Sviluppatore Web in Formazione. Appassionato di architetture logiche e gestione dei dati.</p>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+            <h2>Il nostro percorso</h2>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Anno</th>
+                        <th>Ruolo / Studio</th>
+                        <th>Descrizione</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024 - 2026</td>
+                        <td>Sviluppatori in Formazione</td>
+                        <td>Studio di HTML, CSS, JS, Node.js e Python.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
 </body>
 </html>

@@ -4,61 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Il Mio Portfolio Professionale</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Intestazione Principale -->
- <nav>
-    <a href="index.html">Home</a> |
-    <a href="about.html">Chi Sono</a> |
-    <a href="contact.html">Contatti</a>
-</nav>
-<hr>
-<header>
-<h1>Benvenuti nel mio Portfolio</h1>
-<p>Sviluppatore Web in contactazione</p>
-</header>
-<!-- Sezione Presentazione -->
-<main>
-<section>
-<h2>Chi Sono</h2>
-<p>Ciao! Sono uno studente appassionato di tecnologia e programmazione.
 
-Sto affrontando un percorso intensivo di apprendimento incentrato sullo sviluppo Full-
-Stack, partendo dalle fondamenta del Web (HTML e CSS) fino ad arrivare a strumenti più
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1>Benvenuti nel mio Portfolio</h1>
+            <p>Sviluppatore Web in Formazione</p>
+        </div>
+    </header>
 
-complessi come JavaScript, Node.js e Python.</p>
-<p>Il mio obiettivo è costruire applicazioni web robuste, scalabili e
-accessibili.</p>
-</section>
-<!-- Sezione Competenza / Interessi -->
-<section>
-<h2>Competenze in Acquisizione</h2>
-<ul>
-<li>Sviluppo dell'interfaccia con HTML5 e CSS3</li>
-<li>Logica di programmazione con JavaScript (ES6)</li>
-<li>Architetture Backend con Node.js ed Express</li>
-<li>Scripting e analisi dati con Python</li>
-</ul>
-</section>
-<!-- Sezione Navigazione verso il contact -->
-<section>
-<h2>Contatti</h2>
-<p>Se desideri propormi una collaborazione o semplicemente scambiare due
-chiacchiere sul codice, visita la pagina dedicata:</p>
-<p>
-<a href="contact.html"><strong>Vai al modulo di contatto &rarr;</
-strong></a>
-</p>
+    <main class="cards-container">
+        
+        <a href="about.html" class="card card-azzurra">
+            <h2>Chi Sono</h2>
+            <hr>
+            <p>Il mio percorso e gli studi</p>
+        </a>
 
+        <a href="contact.html" class="card card-viola">
+            <h2>Contatti</h2>
+            <hr>
+            <p>Mandami un messaggio</p>
+        </a>
 
-contact.html
-Crea un secondo file chiamato contact.html nella stessa identica cartella e inserisci il codice strutturato per
-raccogliere i dati dell'utente:
-</section>
-</main>
-<!-- Piè di pagina -->
-<footer>
-<p>&copy; 2026 - Creato per il percorso di Laboratori Udemy</p>
-</footer>
+        <a href="#" class="card card-rosa">
+            <h2>Progetti</h2>
+            <hr>
+            <p>I miei laboratori pratici</p>
+        </a>
+
+        <a href="#" class="card card-verde">
+            <h2>Competenze</h2>
+            <hr>
+            <p>HTML, CSS, JavaScript</p>
+        </a>
+
+    </main>
+
+    <footer style="text-align: center; color: white; background-color: #1a1a24; padding: 20px;">
+        <p>&copy; 2026 - Creato per il percorso di Laboratori Udemy</p>
+    </footer>
+
 </body>
 </html>
