@@ -74,10 +74,10 @@ body {
 }
 
 /* --- COLORI CARD --- */
-.card-azzurra { background-color: #79c5ce; }
-.card-viola   { background-color: #9082be; }
-.card-rosa    { background-color: #d18882; }
-.card-verde   { background-color: #87bfa2; }
+.card-azzurra { background-color: #8dccd3; }
+.card-viola   { background-color: #b2a3e2; }
+.card-rosa    { background-color: #efb9b5; }
+.card-verde   { background-color: #acdec4; }
 
 
 /* --- MEDIA QUERY (Responsività) --- */
@@ -101,7 +101,7 @@ body {
 
 .back-link {
     display: inline-block;
-    color: #79c5ce;
+    color: #8dccd3;
     text-decoration: none;
     margin-bottom: 20px;
     font-weight: bold;
@@ -148,7 +148,7 @@ body {
     height: 150px;
     border-radius: 50%; /* Foto rotonde */
     object-fit: cover; /* Taglia la foto senza deformarla */
-    border: 4px solid #79c5ce;
+    border: 4px solid #8dccd3;
     margin-bottom: 15px;
 }
 
@@ -173,7 +173,7 @@ body {
 
 .styled-table th {
     background-color: #3a4560;
-    color: #79c5ce;
+    color: #8dccd3;
 }
 
 /* --- STILE FORM --- */
@@ -192,7 +192,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #79c5ce;
+    color: #8dccd3;
 }
 
 .form-group input, .form-group textarea {
@@ -221,19 +221,25 @@ button {
 }
 
 .btn-submit {
-    background-color: #79c5ce;
+    background-color: #8dccd3;
     color: #1a1a24;
 }
 
 .btn-submit:hover {
-    background-color: #87bfa2;
+    background-color: #acdec4;
 }
 
 .btn-reset {
-    background-color: #d18882;
+    background-color: #efb9b5;
     color: white;
 }
 
 .btn-reset:hover {
     background-color: #c06c66;
 }
+
+
+.bg-rosa { background-color: #efb9b5 !important; }
+.bg-azzurro { background-color: #8dccd3 !important; }
+.bg-viola { background-color: #b2a3e2 !important; }
+.bg-verde { background-color: #acdec4 !important; }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calcolatrice Interattiva</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="page-header">
+        <a href="../progetti.html" class="back-link">&larr; Torna ai Progetti</a>
+        <h1>Calcolatrice Interattiva</h1>
+    </header>
+
+    <main class="page-content">
+        <div class="form-container" style="text-align: center;">
+
+            <p style="margin-bottom: 20px; color: #79c5ce;">Inserisci due numeri, scegli l'operazione e premi "Calcola"!
+            </p>
+
+            <div class="form-group" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                <input type="number" id="numero1" placeholder="N° 1" style="width: 100px;">
+
+                <select id="operazione" style="padding: 10px; border-radius: 5px; border: none; font-size: 1.2rem;">
+                    <option value="add">+</option>
+                    <option value="subtract">-</option>
+                    <option value="multiply">*</option>
+                    <option value="divide">/</option>
+                    <option value="rest">% (Resto)</option>
+                </select>
+
+                <input type="number" id="numero2" placeholder="N° 2" style="width: 100px;">
+            </div>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;"></div>
+            <button id="btn-calcola" class="btn-submit" style="margin-top: 20px;">Calcola</button>
+            <button id="btn-reset" class="btn-reset">Reset</button>
+
+            <h2 id="risultato" style="margin-top: 30px; color: #87bfa2; font-size: 2rem;"></h2>
+        </div>
+
+        
+        </div>
+
+        <footer>
+        © 2026 - Laboratorio - Indra Italia Academy
+    </footer>
+    </main>
+    
+    <script src="calculator.js"></script>
+
+</body>
+
+</html>
