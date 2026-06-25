@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Professionale</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Professionale</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <header class="hero-section">
@@ -16,7 +18,7 @@
     </header>
 
     <main class="cards-container">
-        
+
         <a href="about.html" class="card card-rosa">
             <h2>Chi Siamo</h2>
             <hr>
@@ -35,17 +37,43 @@
             <p>Laboratori pratici e script svolti per l'Academy</p>
         </a>
 
-        <a href="#" class="card card-verde">
-            <h2>Competenze</h2>
-            <hr>
-            <p>HTML, CSS, JS, Node.js, Python, Genesys Cloud</p>
-        </a>
+        <div class="card card-verde">
+            <h2>Dashboard</h2>
+            <hr style="margin-bottom: 15px;">
+
+            <div style="margin-bottom: 20px; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px;">
+                <input type="text" id="input-citta" placeholder="Città (es. London)"
+                    style="padding: 8px; width: 65%; border-radius: 5px; border: none;">
+                <button onclick="cercaMeteo()"
+                    style="padding: 8px; cursor: pointer; border-radius: 5px; border: none; background: #fff; color: #333; font-weight: bold;">🌤️
+                    Meteo</button>
+                <div id="widget-meteo" style="margin-top: 10px; font-weight: bold;"></div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px;">
+                <input type="number" id="input-persone" placeholder="N° Persone (1-5)"
+                    style="padding: 8px; width: 65%; border-radius: 5px; border: none;">
+                <button onclick="cercaAttivita()"
+                    style="padding: 8px; cursor: pointer; border-radius: 5px; border: none; background: #fff; color: #333; font-weight: bold;">🎮
+                    Trova</button>
+                <div id="widget-bored" style="margin-top: 10px; font-weight: bold;"></div>
+                <div style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <button onclick="caricaNews()"
+                        style="padding: 10px; width: 100%; cursor: pointer; border-radius: 5px; border: none; background: #fff; color: #333; font-weight: bold;">📰
+                        Ultime News Tech</button>
+                    <div id="widget-news"
+                        style="margin-top: 10px; padding: 10px; background: white; color: #2b3245; font-size: 0.9rem; border-radius: 5px; display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
     <footer style="text-align: center; color: white; background-color: #1a1a24; padding: 20px;">
         <p>&copy; 2026 - Laboratorio - Indra Italia Academy</p>
     </footer>
-
+    <script src="widget.js"></script>
 </body>
+
 </html>

@@ -1,112 +1,146 @@
-// ---  SETUP INIZIALE ---
-
+// --- SETUP INIZIALE ---
+require('dotenv').config();
 const express = require('express');
-const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const PORT = 3000;
 
-// ---  MIDDLEWARE ---
-// Questo comando è un "traduttore". Permette al server di capire
-// i pacchetti di dati in formato JSON che arrivano dai form.
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.static(__dirname));
 
-// --- DATABASE ---
-const databaseContatti = [
-    { id: 1, nome: "Mario Marini", email: "mario@email.com", messaggio: "Bellissimo portfolio!", status: "letto" },
-    { id: 2, nome: "Luigi Verdi", email: "luigi@email.com", messaggio: "Cerco uno sviluppatore web.", status: "da leggere" },
-    { id: 3, nome: "Perla Todisco", email: "perla@email.com", messaggio: "Come funziona Flexbox?", status: "da leggere" },
-    { id: 4, nome: "Fatima Boldi", email: "fboldi@email.com", messaggio: "Codice orribile. Argh!", status: "spam" }
-];
+// --- CONNESSIONE AL DATABASE SQL ---
+const db = new sqlite3.Database('./database.sqlite', (err) => {
+    if (err) {
+        console.error("Errore di connessione al DB:", err.message);
+    } else {
+        console.log("Connesso al database SQLite con successo.");
+    }
+});
 
+// --- CREAZIONE TABELLA ---
+db.run(`CREATE TABLE IF NOT EXISTS contatti (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL,
+    messaggio TEXT NOT NULL,
+    risposta_api_esterna TEXT, 
+    meteo TEXT,
+    status TEXT DEFAULT 'da leggere',
+    data_invio DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
 
-//--- Endpoints ---
+// --- ENDPOINTS (API) ---
 
-// Rotta GET /health
 app.get('/health', (req, res) => {
-    res.status(200).send("Il Server Express è online e funzionante!");
+    res.status(200).send("Il Server Express + SQL è online!");
 });
 
-// Rotta GET /users
+// READ dal Database
 app.get('/users', (req, res) => {
-    
-    // Filtro dati con .filter() -- solo i messaggi "da leggere", NO spam
-    const messaggiUtili = databaseContatti.filter(contatto => {
-        return contatto.status === "da leggere";
-    });
+    const querySQL = "SELECT * FROM contatti WHERE status = 'da leggere'";
 
-    // Modificam struttura dati con .map(), NO email utenti al browser
-    const datiPuliti = messaggiUtili.map(contatto => {
-        return {
-            idMessaggio: contatto.id,
-            mittente: contatto.nome,
-            testo: contatto.messaggio
-        };
-    });
+    db.all(querySQL, [], (err, rows) => {
+        if (err) return res.status(500).json({ errore: err.message });
 
-    // Invio dati puliti e filtrati al browser in formato JSON
-    res.status(200).json({
-        totaleMessaggi: datiPuliti.length,
-        dati: datiPuliti
+        // Pulizia dati (privacy)
+        const datiPuliti = rows.map(riga => ({
+            idMessaggio: riga.id,
+            mittente: riga.nome,
+            testo: riga.messaggio,
+            data: riga.data_invio,
+            suggerimento_bot: riga.risposta_api_esterna,
+            meteo_roma: riga.meteo
+        }));
+
+        res.status(200).json({ totaleMessaggi: datiPuliti.length, dati: datiPuliti });
     });
 });
 
-// --- Rotta POST con app.post perché stiamo *ricevendo* dati dal form contatti, Sì gestione errori
-app.post('/api/contatti', (req, res) => {
-    
-    // req.body contiene i dati inviati dal client (browser)
+// CREATE nel Database
+app.post('/api/contatti', async (req, res) => {
     const { nome, email, messaggio } = req.body;
 
-    // Validazione input e STATUS 400 (Bad Request - Errore dell'utente)
     if (!nome || !email || !messaggio) {
-        // Se manca un campo
-        return res.status(400).json({ 
-            errore: "Validazione fallita", 
-            dettaglio: "Nome, email e messaggio sono campi obbligatori." 
-        });
+        return res.status(400).json({ errore: "Campi obbligatori mancanti." });
     }
-
     if (!email.includes('@')) {
-        return res.status(400).json({ 
-            errore: "Validazione fallita", 
-            dettaglio: "Formato email non valido." 
-        });
+        return res.status(400).json({ errore: "Formato email non valido." });
     }
+    db.run(`INSERT INTO contatti (nome, email, messaggio) VALUES (?, ?, ?)`,
+        [nome, email, messaggio], function (err) {
+            if (err) return res.status(500).json({ errore: "DB Error" });
+            res.status(201).json({
+                successo: true,
+                messaggio: "Il tuo messaggio è stato salvato nel Database!"
+            });
+        });
+});
 
-    // TRY-CATCH e STATUS 500 (Internal Server Error - Errore nostro)
+app.post('/api/meteo', async (req, res) => {
+    const { citta } = req.body;
+    const city = citta || "Rome";
+
     try {
-        // Creiamo il nuovo oggetto contatto
-        const nuovoContatto = {
-            id: databaseContatti.length + 1, // Genera un ID finto progressivo
-            nome: nome,
-            email: email,
-            messaggio: messaggio,
-            status: "da leggere"
-        };
+        // Passo 1: Trova le coordinate della città
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
+        const geoData = await geoRes.json();
 
-        // Lo salviamo nel database finto
-        databaseContatti.push(nuovoContatto);
-        fs.writeFileSync('./messaggi.json', JSON.stringify(databaseContatti, null, 2));
+        if (geoData.results) {
+            const { latitude, longitude, name } = geoData.results[0];
 
-        // STATUS 201 (Created - Tutto è andato a buon fine e un dato è stato creato)
-        return res.status(201).json({ 
-            successo: true, 
-            messaggio: "Contatto salvato con successo!",
-            datiSalvati: nuovoContatto
-        });
+            // Passo 2: Trova il meteo per quelle coordinate
+            const meteoRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+            const meteoData = await meteoRes.json();
 
-    } catch (errore) {
-        // Se qualcosa si rompe nel blocco 'try' (es. database offline)
-        // catturiamo l'errore qui per non far crashare il server.
-        console.error("Errore imprevisto nel salvataggio:", errore);
-        return res.status(500).json({ 
-            errore: "Errore interno del server", 
-            dettaglio: "Si è verificato un problema tecnico, riprova più tardi." 
-        });
+            return res.json({ meteo: `${name.toUpperCase()}: ${meteoData.current_weather.temperature}°C` });
+        } else {
+            return res.status(404).json({ meteo: "Città non trovata." });
+        }
+    } catch (e) {
+        return res.status(500).json({ meteo: "Errore interno del server" });
+    }
+});
+
+// --- 3. NUOVA ROTTA NEWS (100% Gratuita, No Chiavi!) ---
+app.get('/api/news', async (req, res) => {
+    try {
+        // API pubblica che fornisce notizie italiane (senza bisogno di registrazione)
+        const resp = await fetch('https://saurav.tech/NewsAPI/top-headlines/category/technology/us.json');
+        const data = await resp.json();
+
+        // Prendiamo solo le prime 3 notizie per non intasare il widget
+        const primeNotizie = data.articles.slice(0, 3).map(articolo => ({
+            titolo: articolo.title,
+            url: articolo.url
+        }));
+
+        res.json({ notizie: primeNotizie });
+    } catch (e) {
+        res.status(500).json({ errore: "News non disponibili al momento." });
+    }
+});
+
+app.post('/api/attivita', async (req, res) => {
+    const { partecipanti } = req.body;
+    try {
+
+
+
+        console.log("Interrogazione Bored API in corso...");
+
+        const boredAPI = partecipanti
+            ? `https://bored-api.appbrewery.com/filter?participants=${partecipanti}`
+            : 'https://bored-api.appbrewery.com/random';
+        const boredResponse = await fetch(boredAPI);
+        const data = await boredResponse.json();
+        const activity = Array.isArray(data) ? data[0].activity : data.activity;
+        res.json({ curiosita: activity || "Nessuna attività trovata con questi criteri." });
+    } catch (e) {
+        res.json({ curiosita: "Errore di connessione API" });
     }
 });
 
 // --- AVVIO SERVER ---
 app.listen(PORT, () => {
-    console.log(`🚀 Server avviato con successo su http://localhost:${PORT}`);
+    console.log(`Server avviato su http://localhost:${PORT}`);
 });

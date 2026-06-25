@@ -11,7 +11,7 @@ body {
     color: white;
 }
 
-/* --- HERO SECTION (Parte alta) --- */
+/* --- HERO SECTION --- */
 .hero-section {
     height: 40vh; /* 40% altezza schermo */
     display: flex; /* Flexbox */
@@ -32,6 +32,8 @@ body {
 .cards-container {
     display: flex; /* Flexbox */
     flex-wrap: wrap; /* Card a capo se non c'è spazio */
+    gap: 20px;
+    padding: 20px;
     width: 100%;
 }
 
@@ -41,6 +43,7 @@ body {
     flex: 1 1 50%; 
     min-height: 300px; /* Altezza minima dei blocchi */
     padding: 40px;
+    border-radius: 20px;
     text-decoration: none; /* No sottolineatura link */
     color: white;
     
@@ -52,12 +55,15 @@ body {
 }
 
 .card:hover {
-    filter: brightness(1.1); /* Hovering */
+    filter: brightness(1.1);
+    transform: scale(1.02);
 }
 
 .card h2 {
     font-size: 1.5rem;
     margin-bottom: 5px;
+    border-bottom: 2px;
+    display: inline-block;
 }
 
 .card hr {
@@ -77,7 +83,7 @@ body {
 .card-azzurra { background-color: #8dccd3; }
 .card-viola   { background-color: #b2a3e2; }
 .card-rosa    { background-color: #efb9b5; }
-.card-verde   { background-color: #acdec4; }
+.card-verde   { background-color: #7ae4ad; }
 
 
 /* --- MEDIA QUERY (Responsività) --- */
@@ -238,8 +244,49 @@ button {
     background-color: #c06c66;
 }
 
+/* --- STILI BACHECA MESSAGGI --- */
+.messaggio-card {
+    background-color: white;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.messaggio-card:hover {
+    transform: translateY(-5px);
+}
+
+.messaggio-header {
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 2px solid #eee; 
+    padding-bottom: 10px; 
+    margin-bottom: 10px;
+}
+
+.messaggio-mittente {
+    font-size: 1.2rem; 
+    color: #79c5ce; 
+    font-weight: bold;
+}
+
+.messaggio-testo {
+    font-size: 1.1rem; 
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.messaggio-dati-extra {
+    background-color: #f9f9f9; 
+    padding: 10px; 
+    border-radius: 5px; 
+    font-size: 0.9rem;
+    color: #555;
+}
 
 .bg-rosa { background-color: #efb9b5 !important; }
 .bg-azzurro { background-color: #8dccd3 !important; }
 .bg-viola { background-color: #b2a3e2 !important; }
-.bg-verde { background-color: #acdec4 !important; }
+.bg-verde { background-color: #7ae4ad !important; }
