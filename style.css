@@ -34,15 +34,16 @@ body {
     flex-wrap: wrap; /* Card a capo se non c'è spazio */
     gap: 20px;
     padding: 20px;
+    max-width: 1000px;
     width: 100%;
+    margin: 40px auto;
 }
 
 /* --- SINGOLE CARD --- */
 .card {
-    /* Flex-basis: 50%, ogni card prende metà schermo (2 per riga) */
-    flex: 1 1 50%; 
-    min-height: 300px; /* Altezza minima dei blocchi */
-    padding: 40px;
+    flex: 1 1 calc(50% - 10px); 
+    height: 350px; /* Altezza minima dei blocchi */
+    padding: 30px;
     border-radius: 20px;
     text-decoration: none; /* No sottolineatura link */
     color: white;
@@ -50,20 +51,24 @@ body {
     /* Flexbox dentro la card */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; 
-    transition: filter 0.3s ease; /* Hovering */
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    transition: filter 0.3s ease transform 0.2s, box-shadow 0.2s; /* Hovering */
 }
 
 .card:hover {
     filter: brightness(1.1);
     transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
+    font-size: 1.75rem;
+    margin-bottom: 15px;
     border-bottom: 2px;
-    display: inline-block;
+    padding-bottom: 5px;
+    /* display: inline-block; */
 }
 
 .card hr {
@@ -73,7 +78,7 @@ body {
 }
 
 .card p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.8;
@@ -91,7 +96,7 @@ body {
 @media (max-width: 768px) {
     .card {
         flex: 1 1 100%; /* 100% (1 per riga) */
-        min-height: 250px;
+        min-height: 200px;
     }
     .hero-section {
         height: 30vh;

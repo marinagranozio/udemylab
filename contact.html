@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contattami - Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
 </head>
 
 <body class="bg-viola">
@@ -47,8 +49,38 @@
 
             </form>
         </section>
+
     </main>
+
+    <button id="btn-apri-chat" class="chat-fab">💬</button>
+
+    <div id="finestra-chat" class="chat-window" style="display: none;">
+
+        <div class="chat-header">
+            <div class="chat-title">
+                <span class="status-dot"></span>
+                <strong>Live Chat</strong>
+            </div>
+            <div class="chat-actions">
+                <button id="btn-termina-chat" class="btn-header" title="Termina Conversazione">⏹️</button>
+                <button id="btn-chiudi-chat" class="btn-header" title="Riduci a icona">&times;</button>
+            </div>
+        </div>
+
+        <div id="area-messaggi" class="chat-messages">
+            <div class="msg bot-msg">
+                Ciao! 👋 Sono l'assistente virtuale. Come posso aiutarti oggi?
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="input-chat" placeholder="Scrivi un messaggio...">
+            <button id="btn-invia-chat" class="chat-send-btn">&rarr;</button>
+        </div>
+    </div>
+
     <script src="validazione.js"></script>
+    <script src="chat.js"></script>
 </body>
 
 </html>
