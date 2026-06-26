@@ -107,15 +107,17 @@ body {
 
 .back-link {
     display: inline-block;
-    color: #8dccd3;
     text-decoration: none;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    color: #ffffff;
 }
 
 .back-link:hover {
     color: white;
+    transform: translateX(-5px);
 }
 
 .page-content {
@@ -152,8 +154,8 @@ body {
 .profile-pic {
     width: 150px;
     height: 150px;
-    border-radius: 50%; /* Foto rotonde */
-    object-fit: cover; /* Taglia la foto senza deformarla */
+    border-radius: 50%; 
+    object-fit: cover; 
     border: 4px solid #8dccd3;
     margin-bottom: 15px;
 }
@@ -286,7 +288,7 @@ button {
     color: #555;
 }
 
-.bg-rosa { background-color: #efb9b5 !important; }
-.bg-azzurro { background-color: #8dccd3 !important; }
-.bg-viola { background-color: #b2a3e2 !important; }
-.bg-verde { background-color: #7ae4ad !important; }
+.bg-rosa .back-link { background-color: transparent; color: #efb9b5 !important; }
+.bg-azzurro .back-link { background-color: transparent; color:  #8dccd3 !important; }
+.bg-viola .back-link { background-color: transparent; color:  #b2a3e2 !important; }
+.bg-verde .back-link { background-color: transparent; color:  #7ae4ad !important; }

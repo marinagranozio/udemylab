@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Love Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="page-header">
+        <a href="../progetti.html" class="back-link">&larr; Torna ai Progetti</a>
+        <h1>Love Calculator</h1>
+    </header>
+
+    <main class="page-content">
+        <div class="form-container" style="text-align: center;">
+
+            <p style="margin-bottom: 20px; color: #79c5ce;">Inserisci due nomi per calcolarne la compatibilità e premi
+                "Calcola"!</p>
+
+            <div class="form-group" style="display: flex; gap: 15px; justify-content: center; align-items: center;">
+                <input type="text" id="persona1" placeholder="Persona 1" style="width: 150px; text-align: center;">
+
+                <span style="font-size: 2rem; color: #efb9b5;">&hearts;</span>
+
+                <input type="text" id="persona2" placeholder="Persona 2" style="width: 150px; text-align: center;">
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+                <button id="btn-calcola" class="btn-submit">Calcola</button>
+                <button id="btn-reset" class="btn-reset">Reset</button>
+            </div>
+
+            <h2 id="risultato" style="margin-top: 30px; color: #87bfa2; font-size: 1.5rem;"></h2>
+        </div>S
+    </main>
+
+    <script src="lovecalculator.js"></script>
+
+</body>
+
+</html>
